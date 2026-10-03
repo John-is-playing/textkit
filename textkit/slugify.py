@@ -7,6 +7,9 @@ import re
 # 允许保留的字符：字母、数字、下划线、空白、连字符
 _UNSAFE = re.compile(r"[^\w\s-]", re.UNICODE)
 
+# 连续空白折叠成单个连字符
+_WHITESPACE_RUN = re.compile(r"\s+")
+
 
 def slugify(text: str) -> str:
     """把任意文本转成 URL 友好的 slug。
@@ -28,6 +31,6 @@ def slugify(text: str) -> str:
 
     text = text.strip().lower()
     text = _UNSAFE.sub("", text)
-    # 空白替换为连字符
-    text = text.replace(" ", "-")
+    # 连续空白折叠成单个连字符，避免 "Hello   World" 变成 hello---world
+    text = _WHITESPACE_RUN.sub("-", text)
     return text

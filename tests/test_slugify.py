@@ -39,3 +39,10 @@ def test_rejects_non_string():
 
 def test_underscores_preserved():
     assert slugify("foo_bar baz") == "foo_bar-baz"
+
+
+def test_collapses_consecutive_spaces():
+    """连续空白应折叠成单个连字符（对应 issue #2）。"""
+    assert slugify("Hello   World") == "hello-world"
+    assert slugify("a    b") == "a-b"
+    assert slugify("  spaced  out  ") == "spaced-out"
