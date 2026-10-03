@@ -12,7 +12,11 @@ def word_count(text: str) -> int:
 
         >>> word_count("hello world")
         2
+        >>> word_count("")
+        0
     """
+    if not text or not text.strip():
+        return 0
     return len(text.split(" "))
 
 
