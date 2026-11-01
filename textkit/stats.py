@@ -13,7 +13,7 @@ def word_count(text: str) -> int:
         >>> word_count("hello world")
         2
     """
-    return len(text.split(" "))
+    return len(text.split())
 
 
 def char_count(text: str, *, ignore_spaces: bool = False) -> int:
